@@ -1,2 +1,6 @@
 ---
 # defaults file for docker-swarm
+docker_swarm_role: manager
+docker_swarm_advertise_address: ''
+docker_swarm_advertise_port: ''
+docker_swarm_join_token: ''

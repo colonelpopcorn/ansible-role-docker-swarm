@@ -1,7 +1,7 @@
 ---
 # tasks file for docker-swarm
 - include_tasks: swarm-manager.yml
-  when: docker_init_swarm and docker_swarm_role == 'manager'
+  when: docker_swarm_role == 'manager'
 
 - include_tasks: swarm-worker.yml
-  when: docker_init_swarm and docker_swarm_role == 'worker'
+  when: docker_swarm_role == 'worker'
