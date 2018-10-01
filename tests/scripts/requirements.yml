@@ -1,2 +1,2 @@
-- name: docker-swarm
-  src: colonelpopcorn.docker-swarm
+- name: docker_swarm
+  src: colonelpopcorn.docker_swarm
