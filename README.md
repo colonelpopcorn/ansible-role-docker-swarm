@@ -1,4 +1,4 @@
-Role Name
+docker-swarm
 =========
 
 A brief description of the role goes here.
@@ -25,7 +25,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: colonelpopcorn.docker-swarm, x: 42 }
 
 License
 -------
