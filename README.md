@@ -1,4 +1,4 @@
-docker-swarm
+Ansible Role: docker-swarm
 =========
 
 A brief description of the role goes here.
