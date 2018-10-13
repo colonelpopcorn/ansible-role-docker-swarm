@@ -14,4 +14,4 @@
     docker swarm join-token manager --quiet
   run_once: True
   changed_when: False
-  register: swarm_join_token
+  register: docker_swarm_join_token
