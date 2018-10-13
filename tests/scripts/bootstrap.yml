@@ -5,7 +5,7 @@
   hosts: all
   name: "Bootstrap docker onto manager and workers"
   roles:
-    - docker-swarm
+    - docker_swarm
   vars:
     swarm_advertise_ip: 10.0.0.10
     swarm_advertise_port: 2377
