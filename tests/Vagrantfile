@@ -1,11 +1,12 @@
 Vagrant.configure("2") do |config|
+  isWindows = Vagrant::Util::Platform.windows?
   config.ssh.forward_agent = true
-  N = 2
-  (0..N).each do |machine_id|
-    if machine_id == N
+  MachineNumber = 2
+  (0..MachineNumber).each do |machine_id|
+    if machine_id == MachineNumber
       machine_name = "swarm-manager"
     else
-      machine_name = "swarm-worker-#{machine_id}"
+      machine_name = "swarm-worker-#{machine_id+1}"
     end
     config.vm.define machine_name do |machine|
       machine.vm.box = "ubuntu/xenial64"
@@ -21,25 +22,17 @@ Vagrant.configure("2") do |config|
         SHELL
       end
 
-      if machine_id == N
-        machine.vm.provision :ansible do |ansible|
+      if machine_id == MachineNumber
+        provisioner = isWindows ? :guest_ansible : :ansible
+        machine.vm.provision provisioner do |ansible|
           ansible.limit = "all"
           ansible.become = true
-          ansible.groups = {
-            "manager" => ["swarm-manager"],
-            "workers" => ["swarm-worker-1", "swarm-worker-2"],
-            "manager:vars" => {
-              "docker_swarm_role" => "manager"
-            },
-            "workers:vars" => {
-              "docker_swarm_role" => "worker"
-            }
-          }
+          ansible.inventory_path = "inventory.example"
           ansible.raw_arguments = [
-            "--private-key=#{Dir.home}/.ssh/vagrant_machine_key"
-          ]
+            "--private-key=#{Dir.home}/.ssh/vagrant_machine_key",
+          ]            
           ansible.galaxy_role_file = "scripts/requirements.yml"
-          ansible.playbook = "scripts/bootstrap.yml"
+          ansible.playbook = "scripts/bootstrap.yml"           
         end
       end
     end

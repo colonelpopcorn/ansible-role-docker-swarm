@@ -12,5 +12,8 @@
 # *.logs
 *.log
 
+# Auto-generated inventory file from guest_ansible plugin.
+vagrant_ansible_inventory_*
+
 
 # End of https://www.gitignore.io/api/vagrant,ansible

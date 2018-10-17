@@ -1,9 +1,4 @@
 ---
-- name: "Check swarm status"
-  command: >
-    docker node ls
-  
-
 - name: "Initialize swarm manager"
   command: >
     docker swarm init --advertise-addr {{ docker_swarm_advertise_address | default(ansible_default_ipv4.address) }}:{{ docker_swarm_advertise_port | default(2377) }}
