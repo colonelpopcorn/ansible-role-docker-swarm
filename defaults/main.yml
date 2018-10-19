@@ -1,4 +1,3 @@
 ---
 # defaults file for docker-swarm
 docker_swarm_role: manager
-docker_swarm_join_token: ''
