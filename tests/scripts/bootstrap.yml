@@ -7,5 +7,5 @@
   roles:
     - docker_swarm
   vars:
-    docker_swarm_advertise_ip: 10.0.0.12
+    docker_swarm_advertise_address: 10.0.0.12
     docker_swarm_advertise_port: 2377
