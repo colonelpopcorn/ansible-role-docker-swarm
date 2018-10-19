@@ -27,12 +27,26 @@ Vagrant.configure("2") do |config|
         machine.vm.provision provisioner do |ansible|
           ansible.limit = "all"
           ansible.become = true
-          ansible.inventory_path = "inventory.example"
+          if isWindows
+            ansible.inventory_path = "inventory.example"
+          else
+            ansible.groups = {
+              "manager" => ["swarm-manager"],
+              "workers" => ["swarm-worker-1", "swarm-worker-2"],
+              "manager:vars" => {
+                "docker_swarm_role" => "manager"
+              },
+              "workers:vars" => {
+                "docker_swarm_role" => "worker"
+              }
+            }
+          end
           ansible.raw_arguments = [
             "--private-key=#{Dir.home}/.ssh/vagrant_machine_key",
           ]            
           ansible.galaxy_role_file = "scripts/requirements.yml"
-          ansible.playbook = "scripts/bootstrap.yml"           
+          ansible.playbook = "scripts/bootstrap.yml"
+          ansible.verbose = true           
         end
       end
     end
